@@ -3,6 +3,7 @@ const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
+const filter = document.getElementById("filter");
 
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
@@ -57,6 +58,20 @@ function addToDo(toDo, id, done, trash){
     
     list.insertAdjacentHTML(position, item);
 }
+
+filter.addEventListener('input', function(e) {
+    const filterText = e.currentTarget.value;
+    const todos = list.querySelectorAll("li.item");
+
+    const filteredTodos = [];
+    todos.forEach(todo => {
+        const todoText = todo.querySelector("p.text").innerHTML;
+        if (todoText.indexOf(filterText))
+            filteredTodos.push(todo);
+    })
+
+    console.log(filteredTodos);
+})
 
 document.addEventListener("keyup",function(even){
     if(event.keyCode == 13){
